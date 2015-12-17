@@ -1,3 +1,39 @@
+nav {
+  background-color: white;
+  color: white;
+  margin: 1em; }
+  nav img#theface {
+    max-height: 40vh; }
+  nav ul {
+    list-style: none;
+    text-align: center;
+    margin: 1em 0;
+    padding: 0; }
+    nav ul li {
+      display: inline-block;
+      min-width: 100px;
+      margin: 0.4em; }
 
+.main {
+  padding: 2em; }
+
+@media screen and (min-width: 992px) {
+  nav {
+    height: 100vh; }
+    nav img#theface {
+      display: block;
+      max-width: none;
+      max-height: 400px;
+      width: 200px;
+      margin: 2em auto; }
+    nav ul {
+      display: block; }
+      nav ul li {
+        display: block;
+        margin: 1em; }
+
+  .main {
+    position: relative;
+    top: 50vh; } }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>React Tutorial</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
-  </head>
-  <body>
-    <div id="content"><h1>Hello React</h1></div>
-    <script type="text/babel" src="scripts/content.js"></script>
-    <script type="text/babel">
-      
-    </script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>React Tutorial</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <nav>
+          <img src="css/images/dotmatrix.gif" alt="Dot Matrix from Reboot" class="img-responsive img-circle center-block" id="theface">
+          <ul>
+            <li><button type="button" class="btn btn-primary btn-lg btn-block">Posts</button></li>
+            <li><button type="button" class="btn btn-primary btn-lg btn-block">Contacts</button></li>
+            <li><button type="button" class="btn btn-primary btn-lg btn-block">Files</button></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="col-md-8 main" id="content">
+        <h1>Hello React</h1>
+      </div>
+    </div>
+  </div>
+  <script type="text/babel" src="scripts/demo.js"></script>
+  <script type="text/babel">
+
+  </script>
+</body>
+
 </html>
