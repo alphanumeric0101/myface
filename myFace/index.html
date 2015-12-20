@@ -6,36 +6,56 @@
   <title>React Tutorial</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+  <script src="https://npmcdn.com/react-router/umd/ReactRouter.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+  <script src="//www.parsecdn.com/js/parse-1.6.12.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 
   <div class="container">
+    <!-- MENU -->
+    <div class="dropdown" id="menu">
+        <button class="btn-danger" data-toggle="dropdown" expanded="false">
+          <h3 id="title">PostBox<span class="fa fa-envelope-o"></span></h3>
+        </button>
+        <a class="btn-danger"></a>
+        <ul class="dropdown-menu">
+          <li>Sign Up</li>
+          <li>Login</li>
+          <li>Preferences</li>
+        </ul>
+    </div>
+    <!-- NAV -->
     <div class="row">
       <div class="col-md-4">
         <nav>
-          <img src="css/images/dotmatrix.gif" alt="Dot Matrix from Reboot" class="img-responsive img-circle center-block" id="theface">
+          <img src="css/images/enzo.jpg" alt="Dot Matrix from Reboot" class="img-responsive img-circle center-block" id="theface">
           <ul>
-            <li><button type="button" class="btn btn-primary btn-lg btn-block">Posts</button></li>
-            <li><button type="button" class="btn btn-primary btn-lg btn-block">Contacts</button></li>
-            <li><button type="button" class="btn btn-primary btn-lg btn-block">Files</button></li>
+            <li>
+              <button type="button" class="btn btn-primary btn-lg btn-block">Posts</button>
+            </li>
+            <li>
+              <button type="button" class="btn btn-primary btn-lg btn-block">People</button>
+            </li>
+            <li><button type="button" class="btn btn-primary btn-lg btn-block">Plans</button></li>
+            <!--<li><a class="btn-danger">Log Out</a></li>-->
           </ul>
         </nav>
       </div>
-
-      <div class="col-md-8 main" id="content">
-        <h1>Hello React</h1>
-      </div>
+      <div class="col-md-8 main" id="content"></div>
     </div>
   </div>
-  <script type="text/babel" src="scripts/demo.js"></script>
-  <script type="text/babel">
+
+  <script type="text/babel" src="scripts/app.js"></script>
+  <script type="text/javascript" src="scripts/style.js"></script>
 
   </script>
 </body>

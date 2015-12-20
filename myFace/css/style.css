@@ -17,6 +17,50 @@ nav {
 .main {
   padding: 2em; }
 
+.dropdown button {
+  top: 5vh;
+  right: 0;
+  position: fixed;
+  color: white;
+  z-index: 2;
+  padding: 3px;
+  border-radius: 5px 0 0 5px;
+  min-width: 150px; }
+  .dropdown button h3#title {
+    padding: 0;
+    margin: 0; }
+    .dropdown button h3#title span {
+      padding: 5px; }
+
+form button {
+  max-width: 150px;
+  margin: auto;
+  font-weight: 300; }
+  form button span {
+    padding-left: 0.5em; }
+form input {
+  width: 100%;
+  line-height: 30px;
+  border-radius: 0 5px 5px 0; }
+form a {
+  max-width: 150px;
+  margin: auto;
+  font-weight: 300; }
+  form a span {
+    padding-left: 0.5em; }
+form span i {
+  padding: 5px;
+  margin: 0;
+  width: 20px;
+  height: 22px; }
+
+#signIn-btn, #register-btn {
+  font-size: 1.3em; }
+
+#sendreg {
+  display: none;
+  margin-left: 40%; }
+
 @media screen and (min-width: 992px) {
   nav {
     height: 100vh; }
@@ -34,6 +78,9 @@ nav {
 
   .main {
     position: relative;
-    top: 50vh; } }
+    top: 5vh; }
+
+  div.dropdown#menu {
+    display: none; } }
 
 /*# sourceMappingURL=style.css.map */

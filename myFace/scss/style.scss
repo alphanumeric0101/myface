@@ -26,6 +26,68 @@ nav {
     padding: 2em;
 }
 
+.dropdown button {
+    top: 5vh;
+    right: 0;
+    position: fixed;
+    color: white;
+    z-index: 2;
+    padding: 3px;
+    border-radius: 5px 0 0 5px;
+    min-width: 150px;
+    
+    h3#title {
+        padding: 0;
+        margin: 0;
+        
+        span {
+            padding: 5px;
+        }
+    }
+}
+
+form {
+    & button {
+        max-width: 150px;
+        margin: auto;
+        font-weight: 300;
+        & span {
+            padding-left: 0.5em;
+        }
+    }
+    
+    & input {
+        width: 100%;
+        line-height: 30px;
+        border-radius: 0 5px 5px 0;
+    }
+    
+    & a {
+        max-width: 150px;
+        margin: auto;
+        font-weight: 300;
+        & span {
+            padding-left: 0.5em;
+        }
+    }
+    & span i {
+        padding: 5px;
+        margin: 0;
+        width: 20px;
+        height: 22px;
+    }
+}
+
+#signIn-btn, #register-btn {
+    font-size: 1.3em;
+}
+
+#sendreg {
+    display: none;
+    margin-left: 40%;
+}
+
+
 @media screen and (min-width: 992px) {
     nav {
         height: 100vh;
@@ -50,7 +112,11 @@ nav {
     
     .main {
         position: relative;
-        top: 50vh;
+        top: 5vh;
+    }
+    
+    div.dropdown#menu {
+        display: none;
     }
 }
 
