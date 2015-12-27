@@ -1,6 +1,5 @@
 Parse.initialize("smv6lK9yWTaYyLWoONESdxxHU1hGTOGGc09TB9TG", "NIYUafzMVQYSSuyiFwRTxtdWQ3mQb4c8X59CNpf7");
 
-
 const app = React.createClass({
   getInitialState: function() {
     return {
@@ -8,8 +7,12 @@ const app = React.createClass({
     };
   },
   render: function() {
-
+    if (this.state.currentUser) {
+      return <div><Posts userId="11"/></div>;
+    }
+    else {
     return <div><h1>Welcome to PostBox!</h1> {this.props.children}</div>;
+    }
   }
 });
 
@@ -36,16 +39,20 @@ const Welcome = React.createClass({
   /*LOGIN FUNCTION*/
 
   logIn: function() {
+    console.log('calling logIn');
     Parse.User.logIn(this.state.email, this.state.password, {
       success: function(user) {
         // Do stuff after successful login. Redirect to Home page...
-        console.log('you logged in from within');
-        alert('good stuff!');
+        alert('welcome back!');
+        window.location = "?#account";
       },
       error: function(user, error) {
         alert('bad login, check your inputs');
       }
     });
+  },
+  renderRegister: function() {
+    window.location = "?#signup";
   },
 
   /*RENDERING THE PAGE*/
@@ -79,13 +86,13 @@ const Welcome = React.createClass({
     
         <br/> {/*BUTTONS TO LOGIN OR GO TO REGISTRATION*/}
       
-        <a className="btn btn-success btn-md btn-block" id="signIn-btn" href="#account" type="submit">Sign In
+        <button className="btn btn-success btn-md btn-block" id="signIn-btn" type="submit">Sign In
           <span className="fa fa-sign-in"></span>
-        </a>
+        </button>
         
-        <a className="btn btn-info btn-md btn-block" id="register-btn" href="#signup">Create
+        <button className="btn btn-info btn-md btn-block" id="register-btn" onClick={this.renderRegister}>Create
           <span className="fa fa-user-plus"></span>
-        </a>
+        </button>
 
       </form>
       
@@ -102,14 +109,10 @@ const Register = React.createClass({
       confPw: ''
     };
   },
-  handleUserNameChange: function(e) {
-    this.setState({
-      username: e.target.value
-    });
-  },
   handleEmailChange: function(e) {
     this.setState({
-      email: e.target.value
+      email: e.target.value,
+      username: e.target.value
     });
   },
   handlePasswordChange: function(e) {
@@ -122,11 +125,12 @@ const Register = React.createClass({
       confPw: e.target.value
     });
   },
+  
   signUp: function(e) {
     e.preventDefault();
     console.log('called signUp function');
     var user = new Parse.User();
-    user.set("username", this.state.username);
+    user.set("username", this.state.email);
     user.set("password", this.state.password);
     user.set("email", this.state.email);
 
@@ -134,13 +138,14 @@ const Register = React.createClass({
       success: function(user) {
         // Hooray! Let them use the app now.
         alert('you have signed up succesfully');
+        window.location = "?#account";
       },
       error: function(user, error) {
         // Show the error message somewhere and let the user try again.
         alert("Error: " + error.code + " " + error.message);
       }
     });
-
+    
   },
   /*RENDERING THE REGISTER PAGE*/
 
@@ -162,10 +167,6 @@ const Register = React.createClass({
         {/*EMAIL AND PASSWORD FIELDS*/}
     
     <div className="input-group">
-      <span className="input-group-addon"><i className="fa fa-user"></i></span>
-      <input type="text" className="form-control" placeholder=" User Name" id="formUserName" onChange={this.handleUserNameChange}></input>
-    </div>    
-    <div className="input-group">
       <span className="input-group-addon"><i className="fa fa-at"></i></span>
       <input type="text" className="form-control" placeholder=" Email" id="formEmail" onChange={this.handleEmailChange}></input>
     </div>
@@ -182,9 +183,9 @@ const Register = React.createClass({
     
         <br/> {/*BUTTONS TO REGISTER*/}
         
-        <a className="btn btn-info btn-md btn-block" id="register-btn" href="#account" type="submit" disabled={!(this.state.password === this.state.confPw && this.state.password.length > 6)}>Sign Up
+        <button className="btn btn-info btn-md btn-block" id="register-btn" type="submit">Sign Up
           <span className="fa fa-user-plus"></span>
-        </a>
+        </button>
 
       </form>
       
@@ -193,14 +194,18 @@ const Register = React.createClass({
 });
 
 const Posts = React.createClass({
+
   getInitialState: function() {
     return {
       text: "",
       fileAdded: false,
       isPrivate: false,
-      content: ''
+      content: '',
+      userPosts: '',
+      body: ''
     };
   },
+  
   handleChange: function(event) {
     this.setState({
       text: event.target.value
@@ -220,26 +225,34 @@ const Posts = React.createClass({
     Parse.User.logOut();
   },
   createPost: function() {
+    var allPosts
+    var user = Parse.User.current();
     var Post = Parse.Object.extend("Post");
     var post = new Post();
-    post.save({
-      content: this.state.text
-    }, {
-      isPrivate: this.state.isPrivate
-    }, {
-      withFile: this.state.fileAdded
+    post.set("content", this.state.text);
+    post.set("user", user);
+    post.save(null, {
+  success: function(post) {
+    // Find all posts by the current user
+    var query = new Parse.Query(Post);
+    query.equalTo("user", user);
+    query.find({
+      success: function(usersPosts) {
+        // userPosts contains all of the posts by the current user.
+        console.log(usersPosts);
+        allPosts = usersPosts
+      }
     });
+  }
+});
+this.setState({userPosts:allPosts});
   },
+  
   render: function() {
     return (
       <div className="well clearfix">
-      <aside>
-      <a className="btn-danger" href="#login" onClick={this.logout}>Log Out</a>
-      </aside>
+      <h1>Your Posts</h1>
       
-        <div id="userPosts">
-        
-        </div>
         <form onSubmit={this.createPost}>
             <textarea className="form-control"
                       onChange={this.handleChange}></textarea>
@@ -257,15 +270,58 @@ const Posts = React.createClass({
               {this.state.fileAdded ? <span className="fa fa-plus-circle"></span> : <span className="fa fa-paperclip"></span> }
             </button>
        </form>
+       <div><Content/></div>
       </div>
     );
   }
 });
 
-function checkLoggedin(nextState, replaceState) {
-  if (Parse.User.current() === false) {
-    replaceState(null, '/login');
+const Content = React.createClass({
+  getInitialState: function() {
+    return {
+      usersPosts: ''
+    };
+  },
+  retrievePosts: function() {
+    console.log('calling getPosts');
+    var Post = Parse.Object.extend("Post");
+var query = new Parse.Query(Post);
+var postObject = []
+query.find({
+  success: function(results) {
+    alert("Successfully retrieved " + results.length + " Posts.");
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) {
+      postObject.push(results[i]);
+      var object = results[i];
+      console.log(object.id + ' - ' + object.get('content'));
+    }
+    
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
   }
+});
+  this.setState({usersPosts: postObject});
+  return this.usersPosts;
+  },
+  render: function() {
+    console.log(this.props.usersPosts);
+    return(
+    // <button className="btn btn-priamry" onClick={this.retrievePosts}>getPostsyo</button>
+    <div>{this.props.usersPosts}</div>
+    
+    );
+  }
+});
+
+function checkLoggedIn(nextState, replaceState) {
+  var user = Parse.User.Current();
+  console.log(Parse.User.Current);
+  if (user) {
+    replaceState(null, '/account');
+  }
+
 }
 
 /*var Login = React.createClass({
@@ -303,21 +359,19 @@ function checkLoggedin(nextState, replaceState) {
 let Router = ReactRouter.Router;
 let Route = ReactRouter.Route;
 let IndexRoute = ReactRouter.IndexRoute;
+let Link = ReactRouter.Link;
+let browserHistroy = ReactRouter.History;
+
 
 ReactDOM.render((
   <Router>
-    <Route path="/" component={app} >
-      <IndexRoute component={Welcome} />
+    <Route path="/" component={app}>
+      <IndexRoute component={Welcome} onEnter={checkLoggedIn}/>
       
-      <Route path="login" component={Welcome}/>
+      <Route path="signup" component={Register}/>
+      <Route path="account" component={app}/>
       
-      <Route path="signup" component={Register} />
-     
-      <Route onEnter={checkLoggedin}>
-        <Route path="account" component={Posts}/>
-      </Route>
-      
-      <Route path="*" component={Welcome}/>
+      <Route path="*" component={app}/>
     </Route>
   </Router>
 ), document.getElementById("content"));
