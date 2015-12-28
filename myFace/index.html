@@ -13,10 +13,12 @@
   <script src="https://npmcdn.com/react-router/umd/ReactRouter.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="//www.parsecdn.com/js/parse-1.6.12.min.js"></script>
+  <script src="https://www.parsecdn.com/js/parse-latest.js"></script>
+  <script type="text/javascript">Parse.User._currentAsync = Parse.User.currentAsync</script>
+  <script type="text/javascript">Parse.User._saveCurrentUser = Parse.User.saveCurrentUser</script>
+  <script src="https://www.parsecdn.com/js/parse-react.js"></script>
   <script src="https://npmcdn.com/history/umd/History.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -47,7 +49,6 @@
               <button type="button" class="btn btn-primary btn-lg btn-block">People</button>
             </li>
             <li><button type="button" class="btn btn-primary btn-lg btn-block">Plans</button></li>
-            <!--<li><a class="btn-danger">Log Out</a></li>-->
           </ul>
         </nav>
       </div>
